@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>Console</title>
     <script>
+        var startTime;
         function getRowCount() {
+            startTime = new Date();
             var request = new XMLHttpRequest();
             request.onreadystatechange = function () {
                 document.getElementById("responseText").innerHTML = request.responseText;
                 document.getElementById("rowCount").innerHTML = JSON.parse(request.responseText).rowCount;
+                document.getElementById("elapsed").innerHTML = (new Date() - startTime) / 1000;
             };
             request.open("GET", "Console");
             request.send();
@@ -19,6 +22,7 @@
 <div>
     <p>Response text : <span id=responseText></span></p>
     <p>Row count : <span id="rowCount">Please wait...</span></p>
+    <p>Elapsed : <span id="elapsed"></span> s</p>
 </div>
 </body>
 </html>
